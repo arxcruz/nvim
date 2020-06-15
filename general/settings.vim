@@ -87,3 +87,6 @@ noremap <Leader>w :ccl<CR>
 
 " Quit vim with sudo
 cmap w!! w !sudo tee %
+
+" All split window open bellow
+set splitbelow
