@@ -1,0 +1,5 @@
+{
+    "python.venvFolders": [".virtualenvs"],
+    "python.jediEnabled": false,
+    "coc.preferences.formatOnSaveFiletypes": ["py"]
+}
