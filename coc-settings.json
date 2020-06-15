@@ -1,5 +1,12 @@
 {
     "python.venvFolders": [".virtualenvs"],
     "python.jediEnabled": false,
-    "coc.preferences.formatOnSaveFiletypes": ["py"]
+    "coc.preferences.formatOnSaveFiletypes": ["py"],
+    "explorer.width": 30,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.keyMappings": {
+        "<cr>": ["expandable?", "expand", "open"],
+        "v": "open:vsplit"
+    }
 }
