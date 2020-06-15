@@ -1,3 +1,12 @@
+" Coc extensions being used
+
+let g:coc_global_extensions = [
+  \ 'coc-yaml',
+  \ 'coc-python',
+  \ 'coc-json',
+  \ 'coc-marketplace',
+  \ ]
+
 set hidden
 set cmdheight=2
 set updatetime=300
