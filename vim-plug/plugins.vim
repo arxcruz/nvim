@@ -16,9 +16,10 @@ Plug 'junegunn/fzf.vim'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'
-Plug 'mklabs/split-term.vim'
+" Plug 'mklabs/split-term.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pearofducks/ansible-vim'
+Plug 'voldikss/vim-floaterm'
 
 " CoC plugins
 " Themes
