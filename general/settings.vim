@@ -90,3 +90,7 @@ cmap w!! w !sudo tee %
 
 " All split window open bellow
 set splitbelow
+
+set showtabline=2
+
+set noshowmode
