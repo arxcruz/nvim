@@ -97,3 +97,6 @@ set noshowmode
 
 " Shortcut to insert new line and paste content bellow
 nmap <Leader>p o<esc>P
+
+" Insert one single character
+nnoremap <C-i> i_<Esc>r
