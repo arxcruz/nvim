@@ -1,11 +1,12 @@
 " Coc extensions being used
 
 let g:coc_global_extensions = [
-  \ 'coc-yaml',
-  \ 'coc-python',
+  \ 'coc-explorer',
+  \ 'coc-go',
   \ 'coc-json',
   \ 'coc-marketplace',
-  \ 'coc-explorer',
+  \ 'coc-yaml',
+  \ 'coc-python',
   \ ]
 
 set hidden
@@ -156,4 +157,6 @@ let g:coc_explorer_global_presets = {
 
 nmap <space>e :CocCommand explorer<CR>
 nmap <space>f :CocCommand explorer --preset floating<CR>
+
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
