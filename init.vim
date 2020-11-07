@@ -1,5 +1,5 @@
 " Python environment
-let g:python_host_prog = "$HOME/.virtualenvs/neovim/bin/python3"
+" let g:python_host_prog = "$HOME/.virtualenvs/neovim/bin/python3"
 let g:python3_host_prog = "$HOME/.virtualenvs/neovim/bin/python3"
 
 source $HOME/.config/nvim/vim-plug/plugins.vim
