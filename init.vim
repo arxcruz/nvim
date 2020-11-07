@@ -9,4 +9,6 @@ source $HOME/.config/nvim/plug-config/floatterm.vim
 source $HOME/.config/nvim/plug-config/fzf.vim
 source $HOME/.config/nvim/plug-config/nerdcommenter.vim
 source $HOME/.config/nvim/plug-config/nerdtree.vim
+source $HOME/.config/nvim/plug-config/which-key.vim
+source $HOME/.config/nvim/themes/airline.vim
 " source $HOME/.config/nvim/plug-config/split-term.vim

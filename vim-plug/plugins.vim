@@ -20,6 +20,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'pearofducks/ansible-vim'
 Plug 'voldikss/vim-floaterm'
+Plug 'liuchengxu/vim-which-key'
 
 " CoC plugins
 " Themes

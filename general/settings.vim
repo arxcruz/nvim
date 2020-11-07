@@ -90,3 +90,13 @@ cmap w!! w !sudo tee %
 
 " All split window open bellow
 set splitbelow
+
+set showtabline=2
+
+set noshowmode
+
+" Shortcut to insert new line and paste content bellow
+nmap <Leader>p o<esc>P
+
+" Insert one single character
+nnoremap <C-i> i_<Esc>r
