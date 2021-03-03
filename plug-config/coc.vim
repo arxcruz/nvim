@@ -6,7 +6,7 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-marketplace',
   \ 'coc-yaml',
-  \ 'coc-pyright,',
+  \ 'coc-pyright',
   \ ]
 
 set hidden
