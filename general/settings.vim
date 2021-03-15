@@ -58,8 +58,8 @@ map <c-l> <c-w>l
 map <c-h> <c-w>h
 
 " easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+map <Leader>n <esc>:bprevious<CR>
+map <Leader>m <esc>:bnext<CR>
 
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
