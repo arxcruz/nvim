@@ -9,10 +9,12 @@ endif
 call plug#begin('~/.config/nvim/bundle')
 
 " General usage
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-fugitive'

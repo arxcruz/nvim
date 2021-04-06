@@ -1,8 +1,8 @@
 {
     "python.venvFolders": [".virtualenvs"],
     "python.jediEnabled": false,
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": ["-l 80"],
+    "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Path": "/usr/bin/autopep8-3",
     "coc.preferences.formatOnSaveFiletypes": ["py"],
     "explorer.width": 30,
     "explorer.icon.enableNerdfont": true,
