@@ -20,8 +20,8 @@ vim.api.nvim_set_keymap('v', '<C-Z>', '<C-C>:update<CR>', {noremap = true, silen
 vim.api.nvim_set_keymap('i', '<C-Z>', '<C-O>:update<CR>', {noremap = true, silent = true})
 
 -- Easier moving between buffers
-vim.api.nvim_set_keymap('n', '<Leader>n', '<esc>:bprevious<CR>', {silent = true})
-vim.api.nvim_set_keymap('n', '<Leader>m', '<esc>:bnext<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>n', '<esc>:tabprevious<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>m', '<esc>:tabnext<CR>', {silent = true})
 
 -- Moving of code blocks
 vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
