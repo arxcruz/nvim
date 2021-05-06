@@ -1,6 +1,5 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
-
 local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
@@ -27,11 +26,21 @@ return require('packer').startup(function(use)
     use 'f-person/git-blame.nvim'
 
     -- Themes
-    use 'vim-airline/vim-airline'
     use 'trevordmiller/nova-vim'
+    use 'cocopon/iceberg.vim'
 
     -- Explorer
     use 'kyazdani42/nvim-tree.lua'
-    -- Icons
     use 'kyazdani42/nvim-web-devicons'
+
+    -- Visual
+    use 'dstein64/nvim-scrollview'
+    use 'sheerun/vim-polyglot'
+
+    -- Auto complete
+    use 'hrsh7th/nvim-compe'
+    use 'glepnir/lspsaga.nvim'
+
+    -- Terminal
+    use 'voldikss/vim-floaterm'
 end)

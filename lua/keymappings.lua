@@ -13,3 +13,19 @@ vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {silent = true})
 vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {silent = true})
 vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {silent = true})
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {silent = true})
+
+-- Quicksave commands
+vim.api.nvim_set_keymap('n', '<C-Z>', ':update<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '<C-Z>', '<C-C>:update<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<C-Z>', '<C-O>:update<CR>', {noremap = true, silent = true})
+
+-- Easier moving between buffers
+vim.api.nvim_set_keymap('n', '<Leader>n', '<esc>:bprevious<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>m', '<esc>:bnext<CR>', {silent = true})
+
+-- Moving of code blocks
+vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true, silent = true})
+
+-- Insert new line and paste content bellow
+vim.api.nvim_set_keymap('n', '<Leader>p', 'o<esc>P', {silent = true})
