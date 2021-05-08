@@ -10,6 +10,7 @@ require('nvimtree')
 require('nvimcompe')
 require('devicon')
 require('floatterm')
+require('fzf')
 -- LSP
 require('lsp')
 require('lsp.pyright')

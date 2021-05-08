@@ -41,6 +41,8 @@ return require('packer').startup(function(use)
     use 'hrsh7th/nvim-compe'
     use 'glepnir/lspsaga.nvim'
 
+    -- Search
+    use 'junegunn/fzf.vim'
     -- Terminal
     use 'voldikss/vim-floaterm'
 end)
