@@ -29,3 +29,6 @@ vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true, silent = true})
 
 -- Insert new line and paste content bellow
 vim.api.nvim_set_keymap('n', '<Leader>p', 'o<esc>P', {silent = true})
+
+-- Toggle gitblame
+vim.api.nvim_set_keymap('n', '<F9>', ':GitBlameToggle<CR>', {silent = true})
