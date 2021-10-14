@@ -1,4 +1,4 @@
--- Stolen from https://github.com/ChristianChiarulli/nvcode/blob/master/lua/lsp/init.lua
+-- TODO figure out why this don't work
 vim.fn.sign_define(
     "LspDiagnosticsSignError",
     {texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError"}
@@ -30,7 +30,6 @@ vim.cmd("nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll
 -- scroll up hover doc
 vim.cmd("nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
-vim.cmd("nnoremap <silent> <space>f <cmd>lua vim.lsp.buf.formatting()<CR>")
 
 -- Set Default Prefix.
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
@@ -81,8 +80,6 @@ autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
 -- Java
 -- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
 
-vim.cmd("autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)")
-
 local function documentHighlight(client, bufnr)
     -- Set autocommands conditional on server_capabilities
     if client.resolved_capabilities.document_highlight then
@@ -103,8 +100,10 @@ local function documentHighlight(client, bufnr)
 end
 local lsp_config = {}
 
-function lsp_config.common_on_attach(client, bufnr)
-    documentHighlight(client, bufnr)
+if O.document_highlight then
+    function lsp_config.common_on_attach(client, bufnr)
+        documentHighlight(client, bufnr)
+    end
 end
 
 function lsp_config.tsserver_on_attach(client, bufnr)
