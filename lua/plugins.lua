@@ -1,17 +1,15 @@
-local execute = vim.api.nvim_command
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
-  execute 'packadd packer.nvim'
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-local my = function(file) require(file) end
-
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile' -- Auto compile when there are changes in plugins.lua
-
-require('packer').init({display = {auto_clean = false}})
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
 
 return require('packer').startup(function(use)
     -- Packer can manage itself as an optional plugin
@@ -19,7 +17,10 @@ return require('packer').startup(function(use)
 
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'kabouzeid/nvim-lspinstall'
+    use 'williamboman/nvim-lsp-installer'
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/nvim-cmp'
 
     -- Git
     use 'tpope/vim-fugitive'
@@ -35,11 +36,11 @@ return require('packer').startup(function(use)
 
     -- Visual
     use 'dstein64/nvim-scrollview'
-    use 'sheerun/vim-polyglot'
+    use 'onsails/lspkind-nvim'
+
+    --use 'sheerun/vim-polyglot'
 
     -- Auto complete
-    use 'hrsh7th/nvim-compe'
-    use 'glepnir/lspsaga.nvim'
 
     -- Search
     use 'junegunn/fzf.vim'
