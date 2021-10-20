@@ -14,5 +14,4 @@ require('fzf')
 -- LSP
 require('lsp')
 require('lsp.pyright')
-require('lsp.golang')
-require('lspsaga')
+-- require('lsp.golang')
