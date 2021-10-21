@@ -21,6 +21,16 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/nvim-cmp'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'tamago324/nlsp-settings.nvim'
+
+    -- Commenter
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
 
     -- Git
     use 'tpope/vim-fugitive'
@@ -44,6 +54,7 @@ return require('packer').startup(function(use)
 
     -- Search
     use 'junegunn/fzf.vim'
+
     -- Terminal
     use 'voldikss/vim-floaterm'
     use 'christoomey/vim-tmux-navigator'

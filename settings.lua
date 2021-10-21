@@ -10,7 +10,7 @@ an executable
 O.auto_complete = true
 O.auto_close_tree = 0
 O.wrap_lines = false
-
+O.document_highlight = false
 -- python
 -- add things like O.python.formatter.yapf.exec_path
 -- add things like O.python.linter.flake8.exec_path
