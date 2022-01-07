@@ -54,6 +54,7 @@ return require('packer').startup(function(use)
 
     -- Search
     use 'junegunn/fzf.vim'
+    use 'junegunn/fzf'
 
     -- Terminal
     use 'voldikss/vim-floaterm'
