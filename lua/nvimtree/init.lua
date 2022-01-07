@@ -2,7 +2,6 @@ vim.g.nvim_tree_add_trailing = 1
 vim.g.nvim_tree_gitignore = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_indent_markers = 1
 vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_root_folder_modifier = ':~'
@@ -23,6 +22,9 @@ require'nvim-tree'.setup {
     open_on_tab = true,
     view = {
         width = 40,
+    },
+    filters = {
+        dotfiles = true,
     }
 }
 
