@@ -1,5 +1,4 @@
 vim.g.nvim_tree_add_trailing = 1
-vim.g.nvim_tree_gitignore = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_group_empty = 1
 vim.g.nvim_tree_indent_markers = 1
@@ -25,6 +24,9 @@ require'nvim-tree'.setup {
     },
     filters = {
         dotfiles = true,
+    },
+    git = {
+        ignore = true,
     }
 }
 
