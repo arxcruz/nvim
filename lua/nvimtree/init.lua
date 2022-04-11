@@ -1,8 +1,6 @@
 vim.g.nvim_tree_add_trailing = 1
 vim.g.nvim_tree_git_hl = 1
 vim.g.nvim_tree_group_empty = 1
-vim.g.nvim_tree_indent_markers = 1
-vim.g.nvim_tree_quit_on_open = 1
 vim.g.nvim_tree_root_folder_modifier = ':~'
 vim.g.nvim_tree_width_allow_resize  = 1
 
@@ -27,6 +25,16 @@ require'nvim-tree'.setup {
     },
     git = {
         ignore = true,
+    },
+    renderer  = {
+        indent_markers = {
+            enabled = true,
+        },
+    },
+    actions = {
+        open_file = {
+            quit_on_open = true,
+        }
     }
 }
 
