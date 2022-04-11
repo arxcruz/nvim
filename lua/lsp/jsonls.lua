@@ -5,7 +5,7 @@ require"lspconfig".jsonls.setup {
     -- The schemas defined in `jsonls.json` will be merged with the list configured here.
     settings = {
         json = {
-        schemas = require'nlspsettings.jsonls'.get_default_schemas()
+        -- schemas = require'nlspsettings.jsonls'.get_default_schemas()
         }
     }
 }
