@@ -14,6 +14,9 @@ require('floatterm')
 require('fzf')
 require('treesitter')
 require('statusline')
+require('whichkey')
+require('telescopeconf')
+
 -- LSP
 require('lsp')
 require('lsp.jsonls')

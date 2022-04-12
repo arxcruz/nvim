@@ -52,12 +52,20 @@ return require('packer').startup(function(use)
 
     -- Visual
     use 'dstein64/nvim-scrollview'
-    use 'onsails/lspkind-nvim'
 
     -- telescope
     use({
         "nvim-telescope/telescope.nvim",
         requires = { "nvim-lua/plenary.nvim" },
+    })
+    use { "nvim-telescope/telescope-file-browser.nvim" }
+
+    -- Which key
+    use({
+        "folke/which-key.nvim",
+        config = function()
+            require("which-key").setup({})
+        end,
     })
     --use 'sheerun/vim-polyglot'
 
