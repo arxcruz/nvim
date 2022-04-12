@@ -24,6 +24,8 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lua'
     use 'tamago324/nlsp-settings.nvim'
     use 'jose-elias-alvarez/null-ls.nvim'
+    use 'nvim-lua/lsp-status.nvim'
+    use 'nvim-treesitter/nvim-treesitter'
 
     -- Commenter
     use {
@@ -40,7 +42,7 @@ return require('packer').startup(function(use)
     -- Themes
     use 'trevordmiller/nova-vim'
     use 'cocopon/iceberg.vim'
-
+    use 'nvim-lualine/lualine.nvim'
     -- Explorer
     use 'kyazdani42/nvim-tree.lua'
     use 'kyazdani42/nvim-web-devicons'
@@ -49,6 +51,11 @@ return require('packer').startup(function(use)
     use 'dstein64/nvim-scrollview'
     use 'onsails/lspkind-nvim'
 
+    -- telescope
+    use({
+        "nvim-telescope/telescope.nvim",
+        requires = { "nvim-lua/plenary.nvim" },
+    })
     --use 'sheerun/vim-polyglot'
 
     -- Auto complete
