@@ -17,5 +17,4 @@ require('statusline')
 -- LSP
 require('lsp')
 require('lsp.jsonls')
--- require('lsp.pyright')
 require('lsp.golang')
