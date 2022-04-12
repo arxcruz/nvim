@@ -1,57 +1,122 @@
-local nvim_lsp = require 'lspconfig'
+local cmp = require("cmp")
+local lsp_status = require("lsp-status")
 
-local function lsp_highlight_document(client)
-  -- Set autocommands conditional on server_capabilities
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-      false
-    )
-  end
+local win = require("lspconfig.ui.windows")
+local _default_opts = win.default_opts
+
+win.default_opts = function(options)
+    local opts = _default_opts(options)
+    opts.border = "rounded"
+    return opts
 end
 
-local on_attach = function(_, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+-- statusline progress setup
+lsp_status.config({
+    current_function = false,
+    show_filename = false,
+    diagnostics = false,
+    status_symbol = "",
+    select_symbol = nil,
+    update_interval = 200,
+})
 
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>ca', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>e', ':quit<CR>', opts)
+-- completion setup
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            -- vim.fn["vsnip#anonymous"](args.body)
+            require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+            -- vim.fn["UltiSnips#Anon"](args.body)
+        end,
+    },
+    mapping = {
+        ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-f>"] = cmp.mapping.scroll_docs(4),
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "s" }),
+    },
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+        -- { name = "ultisnips" },
+        -- { name = "vsnip" },
+        { name = "buffer" },
+        { name = "path" },
+    },
+})
 
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+-- helper function for mappings
+local m = function(mode, key, result)
+    vim.api.nvim_buf_set_keymap(0, mode, key, "<cmd> " .. result .. "<cr>", {
+        noremap = true,
+        silent = true,
+    })
 end
 
-require('lsp.handlers').setup()
+-- function to attach completion when setting up lsp
+local on_attach = function(client)
+    lsp_status.register_progress()
+    lsp_status.on_attach(client)
 
-require('nlspsettings').setup()
-
-local lsp_config = {}
-
-function lsp_config.on_attach(client, bufnr)
-    on_attach(client, bufnr)
-    lsp_highlight_document(client)
+    -- Mappings.
+    m("n", "ga", "lua vim.lsp.buf.code_action()")
+    m("n", "gD", "lua vim.lsp.buf.declaration()")
+    m("n", "gd", "lua vim.lsp.buf.definition()")
+    m("n", "ge", "lua vim.diagnostic.goto_next()")
+    m("n", "gE", "lua vim.diagnostic.goto_prev()")
+    m("n", "gi", "lua vim.lsp.buf.implementation()")
+    m("n", "gr", "lua vim.lsp.buf.references()")
+    m("n", "K", "lua vim.lsp.buf.hover()")
+    -- m("n", "<space>rn", "lua vim.lsp.buf.rename()")
+    m("n", "gl", "lua vim.lsp.diagnostic.show_line_diagnostics()")
+    m("n", "<space>f", "lua vim.lsp.buf.formatting()")
+    m("v", "<space>f", "lua vim.lsp.buf.range_formatting()")
 end
 
-return lsp_config
+-- setup lsp installer
+local lsp_installer = require("nvim-lsp-installer")
+
+-- Provide settings first!
+lsp_installer.settings({
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗",
+        },
+    },
+})
+
+lsp_installer.on_server_ready(function(server)
+    local opts = {
+        on_attach = on_attach,
+        capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+        flags = {
+            debounce_text_changes = 150,
+        },
+    }
+    server:setup(opts)
+end)
+
+-- lsp settings
+require("nlspsettings").setup()
+
+-- diagnostics
+vim.diagnostic.config({
+    virtual_text = false,
+    underline = true,
+    float = {
+        source = "always",
+    },
+    severity_sort = true,
+    --[[ virtual_text = {
+      prefix = "»",
+      spacing = 4,
+    }, ]]
+    signs = true,
+    update_in_insert = false,
+})
+
