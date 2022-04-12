@@ -10,15 +10,19 @@ win.default_opts = function(options)
     return opts
 end
 
--- statusline progress setup
-lsp_status.config({
-    current_function = false,
-    show_filename = false,
-    diagnostics = false,
-    status_symbol = "",
-    select_symbol = nil,
-    update_interval = 200,
-})
+local signs = {
+    active = true,
+    values = {
+        { name = "DiagnosticSignError", text = "" },
+        { name = "DiagnosticSignWarn", text = "" },
+        { name = "DiagnosticSignHint", text = "" },
+        { name = "DiagnosticSignInfo", text = "" },
+    },
+}
+
+for _, sign in ipairs(signs.values) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+end
 
 -- completion setup
 cmp.setup({
@@ -71,9 +75,10 @@ local on_attach = function(client)
     m("n", "gr", "lua vim.lsp.buf.references()")
     m("n", "K", "lua vim.lsp.buf.hover()")
     -- m("n", "<space>rn", "lua vim.lsp.buf.rename()")
-    m("n", "gl", "lua vim.lsp.diagnostic.show_line_diagnostics()")
+    m("n", "gl", "lua vim.diagnostic.open_float()")
     m("n", "<space>f", "lua vim.lsp.buf.formatting()")
     m("v", "<space>f", "lua vim.lsp.buf.range_formatting()")
+    m("n", "<space>q", "lua vim.diagnostic.setloclist()")
 end
 
 -- setup lsp installer
