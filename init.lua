@@ -13,7 +13,7 @@ require('devicon')
 require('floatterm')
 require('fzf')
 require('treesitter')
-
+require('statusline')
 -- LSP
 require('lsp')
 require('lsp.jsonls')
