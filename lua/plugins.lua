@@ -42,7 +42,10 @@ return require('packer').startup(function(use)
     -- Themes
     use 'trevordmiller/nova-vim'
     use 'cocopon/iceberg.vim'
-    use 'nvim-lualine/lualine.nvim'
+    use {
+        'nvim-lualine/lualine.nvim',
+         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
     -- Explorer
     use 'kyazdani42/nvim-tree.lua'
     use 'kyazdani42/nvim-web-devicons'
