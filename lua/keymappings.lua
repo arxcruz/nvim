@@ -32,3 +32,6 @@ vim.api.nvim_set_keymap('n', '<Leader>p', 'o<esc>P', {silent = true})
 
 -- Toggle gitblame
 vim.api.nvim_set_keymap('n', '<F9>', ':GitBlameToggle<CR>', {silent = true})
+
+-- Telescope
+vim.api.nvim_set_keymap('n', 'ff', ':Telescope find_files<CR>', {silent = true})
