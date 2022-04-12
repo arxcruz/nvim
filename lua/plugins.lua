@@ -23,6 +23,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lua'
     use 'tamago324/nlsp-settings.nvim'
+    use 'jose-elias-alvarez/null-ls.nvim'
 
     -- Commenter
     use {

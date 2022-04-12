@@ -9,14 +9,13 @@ require('colorscheme')
 
 -- Plugins
 require('nvimtree')
-require('nvimcmp')
 require('devicon')
 require('floatterm')
 require('fzf')
+require('treesitter')
 
 -- LSP
 require('lsp')
 require('lsp.jsonls')
-require('lsp.pyright')
--- require('lsp.pylsp')
+-- require('lsp.pyright')
 require('lsp.golang')
