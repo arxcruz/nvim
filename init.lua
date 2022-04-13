@@ -17,6 +17,8 @@ require('statusline')
 require('whichkey')
 require('telescopeconf')
 
+-- null-ls
+require('nullls')
 -- LSP
 require('lsp')
 require('lsp.jsonls')

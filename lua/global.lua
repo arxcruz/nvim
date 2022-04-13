@@ -10,8 +10,8 @@ O = {
 
     -- @usage pass a table with your desired languages
     treesitter = {
-        ensure_installed = "all",
-        ignore_install = {"haskell"},
+        ensure_installed = 'all',
+        ignore_install = {'haskell'},
         highlight = {enabled = true},
         playground = {enabled = true},
         rainbow = {enabled = false}
@@ -26,7 +26,9 @@ O = {
         isort = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
-    dart = {sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'},
+    dart = {
+        sdk_path = '/usr/lib/dart/bin/snapshots/analysis_server.dart.snapshot'
+    },
     lua = {
         -- @usage can be 'lua-format'
         formatter = '',
@@ -55,12 +57,18 @@ O = {
         autoformat = false,
         diagnostics = {virtual_text = true, signs = true, underline = true}
     },
-    tailwindls = {filetypes = {'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'}},
-    clang = {diagnostics = {virtual_text = true, signs = true, underline = true}}
+    tailwindls = {
+        filetypes = {
+            'html', 'css', 'scss', 'javascript', 'javascriptreact',
+            'typescript', 'typescriptreact'
+        }
+    },
+    clang = {
+        diagnostics = {virtual_text = true, signs = true, underline = true}
+    }
     -- css = {formatter = '', autoformat = false, virtual_text = true},
     -- json = {formatter = '', autoformat = false, virtual_text = true}
 }
 
 DATA_PATH = vim.fn.stdpath('data')
 CACHE_PATH = vim.fn.stdpath('cache')
-

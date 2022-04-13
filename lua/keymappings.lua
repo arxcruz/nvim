@@ -1,12 +1,16 @@
-vim.api.nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
+vim.api
+    .nvim_set_keymap('n', '<Space>', '<NOP>', {noremap = true, silent = true})
 vim.g.mapleader = ','
 
 -- Quit current window and all windows
-vim.api.nvim_set_keymap('n', '<Leader>e', ':quit<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<Leader>E', ':qa!<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>e', ':quit<CR>',
+                        {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>E', ':qa!<CR>',
+                        {noremap = true, silent = true})
 
 -- nvim-tree
-vim.api.nvim_set_keymap('n', '<Space>e', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Space>e', ':NvimTreeToggle<CR>',
+                        {noremap = true, silent = true})
 
 -- Window movement
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {silent = true})
@@ -15,12 +19,16 @@ vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {silent = true})
 vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {silent = true})
 
 -- Quicksave commands
-vim.api.nvim_set_keymap('n', '<C-Z>', ':update<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('v', '<C-Z>', '<C-C>:update<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', '<C-Z>', '<C-O>:update<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-Z>', ':update<CR>',
+                        {noremap = true, silent = true})
+vim.api.nvim_set_keymap('v', '<C-Z>', '<C-C>:update<CR>',
+                        {noremap = true, silent = true})
+vim.api.nvim_set_keymap('i', '<C-Z>', '<C-O>:update<CR>',
+                        {noremap = true, silent = true})
 
 -- Easier moving between buffers
-vim.api.nvim_set_keymap('n', '<Leader>n', '<esc>:tabprevious<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>n', '<esc>:tabprevious<CR>',
+                        {silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>m', '<esc>:tabnext<CR>', {silent = true})
 
 -- Moving of code blocks

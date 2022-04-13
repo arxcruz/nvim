@@ -1,10 +1,10 @@
 vim.o.hidden = O.hidden_files
 vim.wo.wrap = O.wrap_lines
 vim.wo.number = O.number
-vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
-vim.o.mouse = "a"
+vim.o.clipboard = 'unnamedplus' -- Copy paste between vim and everything else
+vim.o.mouse = 'a'
 vim.o.termguicolors = true
-vim.o.colorcolumn = "80"
+vim.o.colorcolumn = '80'
 vim.o.tw = 79
 
 vim.cmd('set fo-=t')
