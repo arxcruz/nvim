@@ -3,8 +3,9 @@ vim.api
 vim.g.mapleader = ','
 
 -- Quit current window and all windows
-vim.api.nvim_set_keymap('n', '<Leader>e', ':quit<CR>',
+vim.api.nvim_set_keymap('n', '<Leader>x', ':quit<CR>',
                         {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>e', ':Bdelete<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>E', ':qa!<CR>',
                         {noremap = true, silent = true})
 

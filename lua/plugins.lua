@@ -61,6 +61,7 @@ return require('packer').startup(function(use)
         tag = '*',
         requires = 'kyazdani42/nvim-web-devicons'
     }
+    use 'moll/vim-bbye'
 
     -- telescope
     use({'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}})
