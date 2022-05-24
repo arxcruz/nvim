@@ -54,14 +54,22 @@ return require('packer').startup(function(use)
     -- Visual
     use 'dstein64/nvim-scrollview'
 
+    -- Bufferline
+    -- using packer.nvim
+    use {
+        'akinsho/bufferline.nvim',
+        tag = '*',
+        requires = 'kyazdani42/nvim-web-devicons'
+    }
+
     -- telescope
-    use({"nvim-telescope/telescope.nvim", requires = {"nvim-lua/plenary.nvim"}})
-    use {"nvim-telescope/telescope-file-browser.nvim"}
+    use({'nvim-telescope/telescope.nvim', requires = {'nvim-lua/plenary.nvim'}})
+    use {'nvim-telescope/telescope-file-browser.nvim'}
 
     -- Which key
     use({
-        "folke/which-key.nvim",
-        config = function() require("which-key").setup({}) end
+        'folke/which-key.nvim',
+        config = function() require('which-key').setup({}) end
     })
     -- use 'sheerun/vim-polyglot'
 

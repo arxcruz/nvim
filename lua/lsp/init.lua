@@ -62,7 +62,7 @@ end
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
     if client.name == 'sumneko_lua' then
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.document_formatting = false
     end
     lsp_status.register_progress()
     lsp_status.on_attach(client)

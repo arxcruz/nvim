@@ -16,6 +16,7 @@ require('treesitter')
 require('statusline')
 require('whichkey')
 require('telescopeconf')
+require('_bufferline')
 
 -- null-ls
 require('nullls')
