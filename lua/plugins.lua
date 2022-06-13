@@ -25,6 +25,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lua'
+    use 'L3MON4D3/LuaSnip'
     use 'tamago324/nlsp-settings.nvim'
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'nvim-lua/lsp-status.nvim'
