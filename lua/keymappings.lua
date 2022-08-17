@@ -48,3 +48,5 @@ vim.api.nvim_set_keymap('n', 'fg', ':Telescope live_grep<CR>', {silent = true})
 
 -- Git
 vim.cmd('ca gr !git review')
+vim.cmd('ca gca Git commit --amend')
+vim.cmd('ca gc Git commit')

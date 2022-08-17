@@ -34,7 +34,7 @@ local which_key = {
 
     opts = {
         mode = "n",
-        prefix = "<leader>",
+        prefix = "<leader>x",
         buffer = nil,
         silent = true,
         noremap = true,
@@ -42,7 +42,7 @@ local which_key = {
     },
     vopts = {
         mode = "v",
-        prefix = "<leader>",
+        prefix = "<leader>x",
         buffer = nil,
         silent = true,
         noremap = true,
