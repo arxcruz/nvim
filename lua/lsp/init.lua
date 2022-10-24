@@ -1,5 +1,6 @@
 local cmp = require('cmp')
 local lsp_status = require('lsp-status')
+local luasnip = require('luasnip')
 
 local win = require('lspconfig.ui.windows')
 local _default_opts = win.default_opts
@@ -28,12 +29,48 @@ for _, sign in ipairs(signs.values) do
     })
 end
 
+local kind_icons = {
+    Text = '',
+    Method = 'm',
+    Function = '',
+    Constructor = '',
+    Field = '',
+    Variable = '',
+    Class = '',
+    Interface = '',
+    Module = '',
+    Property = '',
+    Unit = '',
+    Value = '',
+    Enum = '',
+    Keyword = '',
+    Snippet = '',
+    Color = '',
+    File = '',
+    Reference = '',
+    Folder = '',
+    EnumMember = '',
+    Constant = '',
+    Struct = '',
+    Event = '',
+    Operator = '',
+    TypeParameter = ''
+}
+
+local has_words_before = function()
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0 and
+               vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col,
+                                                                          col)
+                   :match('%s') == nil
+end
+
 -- completion setup
 cmp.setup({
     snippet = {
         expand = function(args)
             -- vim.fn["vsnip#anonymous"](args.body)
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            luasnip.lsp_expand(args.body) -- For `luasnip` users.
             -- vim.fn["UltiSnips#Anon"](args.body)
         end
     },
@@ -43,14 +80,53 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({select = false}),
-        ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
-        ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})
+        -- ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'}),
+        -- ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
+            else
+                fallback()
+            end
+        end, {'i', 's'}),
+
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, {'i', 's'})
+    },
+    formatting = {
+        fields = {'kind', 'abbr', 'menu'},
+        format = function(entry, vim_item)
+            -- Kind icons
+            vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
+            -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+            vim_item.menu = ({
+                copilot = '[Copilot]',
+                luasnip = 'LuaSnip',
+                nvim_lua = '[NVim Lua]',
+                nvim_lsp = '[LSP]',
+                buffer = '[Buffer]',
+                path = '[Path]'
+            })[entry.source.name]
+            return vim_item
+        end
     },
     sources = {
         {name = 'nvim_lsp'}, {name = 'luasnip'}, -- { name = "ultisnips" },
         -- { name = "vsnip" },
         {name = 'buffer'}, {name = 'path'}
-    }
+    },
+    confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = false}
 })
 
 -- helper function for mappings

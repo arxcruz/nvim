@@ -22,5 +22,6 @@ require('_bufferline')
 require('nullls')
 -- LSP
 require('lsp')
+require('luasnip-config')
 require('lsp.jsonls')
 require('lsp.golang')

@@ -30,6 +30,7 @@ return require('packer').startup(function(use)
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'nvim-lua/lsp-status.nvim'
     use 'nvim-treesitter/nvim-treesitter'
+    use { 'saadparwaiz1/cmp_luasnip' }
 
     -- Commenter
     use {
