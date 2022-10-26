@@ -17,6 +17,7 @@ require('statusline')
 require('whichkey')
 require('telescopeconf')
 require('_bufferline')
+require('autopairs')
 
 -- null-ls
 require('nullls')
