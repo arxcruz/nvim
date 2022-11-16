@@ -1,16 +1,20 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({
-        'git', 'clone', '--depth', '1',
-        'https://github.com/wbthomason/packer.nvim', install_path
-    })
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
+
+local packer_bootstrap = ensure_packer()
 
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
 ]])
 
@@ -25,13 +29,19 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lua'
-    use 'L3MON4D3/LuaSnip'
     use 'tamago324/nlsp-settings.nvim'
-    use 'jose-elias-alvarez/null-ls.nvim'
     use 'nvim-lua/lsp-status.nvim'
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'windwp/nvim-autopairs'
+    use 'jose-elias-alvarez/null-ls.nvim'
+
+    -- Code snipsets
+    use 'L3MON4D3/LuaSnip'
     use { 'saadparwaiz1/cmp_luasnip' }
+
+    -- TreeSitter
+    use 'nvim-treesitter/nvim-treesitter'
+
+    -- Coding
+    use 'windwp/nvim-autopairs'
 
     -- Commenter
     use {
@@ -58,7 +68,6 @@ return require('packer').startup(function(use)
     use 'dstein64/nvim-scrollview'
 
     -- Bufferline
-    -- using packer.nvim
     use {
         'akinsho/bufferline.nvim',
         tag = '*',
@@ -75,13 +84,6 @@ return require('packer').startup(function(use)
         'folke/which-key.nvim',
         config = function() require('which-key').setup({}) end
     })
-    -- use 'sheerun/vim-polyglot'
-
-    -- Auto complete
-
-    -- Search
-    -- use 'junegunn/fzf.vim'
-    -- use 'junegunn/fzf'
 
     -- Terminal
     use 'voldikss/vim-floaterm'
