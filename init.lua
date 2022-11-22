@@ -11,6 +11,7 @@ require('colorscheme')
 require('nvimtree')
 require('devicon')
 require('floatterm')
+
 -- require('fzf')
 require('treesitter')
 require('statusline')
@@ -21,6 +22,8 @@ require('autopairs')
 
 -- null-ls
 require('nullls')
+
+require('transparentbg')
 -- LSP
 require('lsp')
 require('luasnip-config')

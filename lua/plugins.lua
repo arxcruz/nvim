@@ -88,4 +88,5 @@ return require('packer').startup(function(use)
     -- Terminal
     use 'voldikss/vim-floaterm'
     use 'christoomey/vim-tmux-navigator'
+    use 'xiyaowong/nvim-transparent'
 end)
