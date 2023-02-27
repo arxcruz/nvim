@@ -10,7 +10,6 @@ require 'nvim-tree'.setup {
         ignore_list = { '.git', 'node_modules', '.cache' },
     },
     hijack_netrw = true,
-    ignore_ft_on_setup = { 'startify', 'dashboard' },
     open_on_tab = true,
     view = { width = 40 },
     filters = { dotfiles = true },
