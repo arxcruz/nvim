@@ -45,6 +45,7 @@ vim.api.nvim_set_keymap('n', '<F9>', ':GitBlameToggle<CR>', {silent = true})
 -- Telescope
 vim.api.nvim_set_keymap('n', 'ff', ':Telescope find_files<CR>', {silent = true})
 vim.api.nvim_set_keymap('n', 'fg', ':Telescope live_grep<CR>', {silent = true})
+vim.api.nvim_set_keymap('n', 'fb', ':Telescope buffers<CR>', {silent = true})
 
 -- Git
 vim.cmd('ca gr !git review')

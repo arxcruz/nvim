@@ -34,7 +34,7 @@ local which_key = {
 
     opts = {
         mode = "n",
-        prefix = "<leader>x",
+        prefix = "<leader>q",
         buffer = nil,
         silent = true,
         noremap = true,
@@ -42,7 +42,7 @@ local which_key = {
     },
     vopts = {
         mode = "v",
-        prefix = "<leader>x",
+        prefix = "<leader>q",
         buffer = nil,
         silent = true,
         noremap = true,
@@ -77,10 +77,6 @@ local which_key = {
         l = {
             name = "LSP",
             a = {":Telescope lsp_code_actions<cr>", "Code Action"},
-            d = {
-                ":Telescope lsp_document_diagnostics<cr>",
-                "Document Diagnostics"
-            },
             w = {":Telescope diagnostics<cr>", "Workspace Diagnostics"},
             f = {":lua vim.lsp.buf.formatting()<cr>", "Format"},
             i = {":LspInfo<cr>", "Info"},
