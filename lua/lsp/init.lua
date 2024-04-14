@@ -122,9 +122,12 @@ cmp.setup({
         end
     },
     sources = {
-        {name = 'nvim_lsp'}, {name = 'luasnip'}, -- { name = "ultisnips" },
+        {name = 'nvim_lsp'}, 
+        {name = 'luasnip'}, -- { name = "ultisnips" },
         -- { name = "vsnip" },
-        {name = 'buffer'}, {name = 'path'}
+        {name = 'buffer'}, 
+        {name = 'path'},
+        {name = 'nvim_lsp_signature_help'}
     },
     confirm_opts = {behavior = cmp.ConfirmBehavior.Replace, select = false}
 })
@@ -160,10 +163,7 @@ local on_attach = function(client)
 end
 
 -- setup lsp installer
-local lsp_installer = require('mason')
-
--- Provide settings first!
-lsp_installer.settings({
+require('mason').setup({
     ui = {
         icons = {
             server_installed = '✓',
@@ -173,30 +173,35 @@ lsp_installer.settings({
     }
 })
 
-lsp_installer.on_server_ready(function(server)
-    local opts = {
-        on_attach = on_attach,
-        capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp
-                                                                       .protocol
-                                                                       .make_client_capabilities()),
-        flags = {debounce_text_changes = 150}
-    }
-    server:setup(opts)
-end)
+local mason_lspconfig = require 'mason-lspconfig'
+mason_lspconfig.setup {
+    ensure_installed = { "pyright" }
+}
+-- Provide settings first!
+-- lsp_installer.on_server_ready(function(server)
+--     local opts = {
+--         on_attach = on_attach,
+--         capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp
+--                                                                        .protocol
+--                                                                        .make_client_capabilities()),
+--         flags = {debounce_text_changes = 150}
+--     }
+--     server:setup(opts)
+-- end)
 
 -- lsp settings
 require('nlspsettings').setup()
 
 -- diagnostics
-vim.diagnostic.config({
-    virtual_text = false,
-    underline = true,
-    float = {source = 'always'},
-    severity_sort = true,
-    --[[ virtual_text = {
-      prefix = "»",
-      spacing = 4,
-    }, ]]
-    signs = true,
-    update_in_insert = false
-})
+-- vim.diagnostic.config({
+--     virtual_text = false,
+--     underline = true,
+--     float = {source = 'always'},
+--     severity_sort = true,
+--     --[[ virtual_text = {
+--       prefix = "»",
+--       spacing = 4,
+--     }, ]]
+--     signs = true,
+--     update_in_insert = false
+-- })
