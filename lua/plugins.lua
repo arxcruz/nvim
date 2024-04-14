@@ -24,7 +24,7 @@ return require('packer').startup(function(use)
 
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'williamboman/nvim-lsp-installer'
+    use 'williamboman/mason.nvim'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/nvim-cmp'
@@ -48,6 +48,9 @@ return require('packer').startup(function(use)
         'numToStr/Comment.nvim',
         config = function() require('Comment').setup() end
     }
+
+    -- Surround
+    use 'tpope/vim-surround'
 
     -- Git
     use 'tpope/vim-fugitive'

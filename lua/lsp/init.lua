@@ -160,7 +160,7 @@ local on_attach = function(client)
 end
 
 -- setup lsp installer
-local lsp_installer = require('nvim-lsp-installer')
+local lsp_installer = require('mason')
 
 -- Provide settings first!
 lsp_installer.settings({
