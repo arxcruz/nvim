@@ -23,10 +23,12 @@ require('autopairs')
 -- null-ls
 require('nullls')
 
+-- Solve transparency
 require('transparentbg')
+
 -- LSP
-require('lsp')
 require('luasnip-config')
-require('lsp.jsonls')
+require('lsp')
 require('lsp.golang')
+require('lsp.jsonls')
 require('lsp.python')
