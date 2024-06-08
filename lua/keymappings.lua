@@ -52,3 +52,25 @@ vim.api.nvim_set_keymap('n', 'fd', ':Telescope diagnostics<CR>', {silent = true}
 vim.cmd('ca gr !git review')
 vim.cmd('ca gca Git commit --amend')
 vim.cmd('ca gc Git commit')
+
+-- LSP
+local m = function(mode, key, result)
+    vim.api.nvim_buf_set_keymap(0, mode, key, '<cmd> ' .. result .. '<cr>',
+                                {noremap = true, silent = true})
+end
+
+vim.api.nvim_set_keymap("n", "gm", "<cmd>lua format_range_operator()<CR>", {noremap = true})
+m('n', 'ga', 'lua vim.lsp.buf.code_action()')
+m('n', 'gD', 'lua vim.lsp.buf.declaration()')
+m('n', 'gd', 'lua vim.lsp.buf.definition()')
+m('n', 'ge', 'lua vim.diagnostic.goto_next()')
+m('n', 'gE', 'lua vim.diagnostic.goto_prev()')
+m('n', 'gi', 'lua vim.lsp.buf.implementation()')
+m('n', 'gr', 'lua vim.lsp.buf.references()')
+m('n', 'K', 'lua vim.lsp.buf.hover()')
+-- m("n", "<space>rn", "lua vim.lsp.buf.rename()")
+-- vim.keymap.set("n", "<space>f", vim.lsp.buf.format, { noremap = true, silent = true })
+m('n', '<space>l', 'lua vim.diagnostic.open_float()')
+m('n', '<space>f', 'lua vim.lsp.buf.format()')
+m('v', '<space>f', 'lua vim.lsp.buf.range_formatting()')
+m('n', '<space>q', 'lua vim.diagnostic.setloclist()')

@@ -138,30 +138,6 @@ local m = function(mode, key, result)
                                 {noremap = true, silent = true})
 end
 
--- function to attach completion when setting up lsp
-local on_attach = function(client)
-    if client.name == 'sumneko_lua' then
-        client.server_capabilities.document_formatting = false
-    end
-    lsp_status.register_progress()
-    lsp_status.on_attach(client)
-
-    -- Mappings.
-    m('n', 'ga', 'lua vim.lsp.buf.code_action()')
-    m('n', 'gD', 'lua vim.lsp.buf.declaration()')
-    m('n', 'gd', 'lua vim.lsp.buf.definition()')
-    m('n', 'ge', 'lua vim.diagnostic.goto_next()')
-    m('n', 'gE', 'lua vim.diagnostic.goto_prev()')
-    m('n', 'gi', 'lua vim.lsp.buf.implementation()')
-    m('n', 'gr', 'lua vim.lsp.buf.references()')
-    m('n', 'K', 'lua vim.lsp.buf.hover()')
-    -- m("n", "<space>rn", "lua vim.lsp.buf.rename()")
-    m('n', '<space>l', 'lua vim.diagnostic.open_float()')
-    m('n', '<space>f', 'lua vim.lsp.buf.formatting()')
-    m('v', '<space>f', 'lua vim.lsp.buf.range_formatting()')
-    m('n', '<space>q', 'lua vim.diagnostic.setloclist()')
-end
-
 -- setup lsp installer
 require('mason').setup({
     ui = {
@@ -177,31 +153,24 @@ local mason_lspconfig = require 'mason-lspconfig'
 mason_lspconfig.setup {
     ensure_installed = { "pyright" }
 }
--- Provide settings first!
--- lsp_installer.on_server_ready(function(server)
---     local opts = {
---         on_attach = on_attach,
---         capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp
---                                                                        .protocol
---                                                                        .make_client_capabilities()),
---         flags = {debounce_text_changes = 150}
---     }
---     server:setup(opts)
--- end)
-
--- lsp settings
+require("mason-null-ls").setup({
+  ensure_installed = { "black" }
+})
 require('nlspsettings').setup()
 
 -- diagnostics
--- vim.diagnostic.config({
---     virtual_text = false,
---     underline = true,
---     float = {source = 'always'},
---     severity_sort = true,
---     --[[ virtual_text = {
---       prefix = "»",
---       spacing = 4,
---     }, ]]
---     signs = true,
---     update_in_insert = false
--- })
+vim.diagnostic.config({
+    virtual_text = false,
+    underline = true,
+    float = {source = 'always'},
+    severity_sort = true,
+    -- virtual_text = {
+    --   prefix = "»",
+    --   spacing = 4,
+    -- },
+    signs = true,
+    update_in_insert = false
+})
+-- Show line diagnostics automatically in hover window
+vim.o.updatetime = 250
+vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]

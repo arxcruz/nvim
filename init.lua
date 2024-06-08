@@ -27,8 +27,8 @@ require('nullls')
 require('transparentbg')
 
 -- LSP
-require('luasnip-config')
 require('lsp')
 require('lsp.golang')
 require('lsp.jsonls')
 require('lsp.python')
+require('luasnip-config')
