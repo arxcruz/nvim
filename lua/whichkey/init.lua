@@ -15,7 +15,7 @@ local which_key = {
             spelling = {enabled = true, suggestions = 20}
         },
         icons = {breadcrumb = "»", separator = "➜", group = "+"},
-        window = {
+        win = {
             border = "none", -- none, single, double, shadow
             position = "bottom", -- bottom, top
             margin = {1, 0, 1, 0},
@@ -26,16 +26,12 @@ local which_key = {
             width = {min = 20, max = 50},
             spacing = 3
         },
-        hidden = {
-            "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ "
-        },
         show_help = true
     },
 
     opts = {
         mode = "n",
         prefix = "<leader>q",
-        buffer = nil,
         silent = true,
         noremap = true,
         nowait = true
@@ -52,69 +48,57 @@ local which_key = {
     -- see https://neovim.io/doc/user/map.html#:map-cmd
     vmappings = {},
     mappings = {
-        ["c"] = {":BufferClose!<CR>", "Close Buffer"},
-        ["e"] = {":Telescope file_browser <CR>", "File Browser"},
-        ["f"] = {":Telescope find_files <CR>", "Find File"},
-        ["h"] = {":nohlsearch<CR>", "No Highlight"},
-        b = {
-            name = "Buffers",
-            l = {":Telescope buffers<CR>", "List Buffers"},
-            b = {":b#<cr>", "Previous"},
-            d = {":bd<cr>", "Delete"},
-            f = {":Telescope buffers <cr>", "Find"},
-            n = {":bn<cr>", "Next"},
-            p = {":bp<cr>", "Previous"}
-        },
-        p = {
-            name = "Packer",
-            c = {":PackerCompile<cr>", "Compile"},
-            i = {":PackerInstall<cr>", "Install"},
-            r = {":lua require('lvim.utils').reload_lv_config()<cr>", "Reload"},
-            s = {":PackerSync<cr>", "Sync"},
-            S = {":PackerStatus<cr>", "Status"},
-            u = {":PackerUpdate<cr>", "Update"}
-        },
-        l = {
-            name = "LSP",
-            a = {":Telescope lsp_code_actions<cr>", "Code Action"},
-            w = {":Telescope diagnostics<cr>", "Workspace Diagnostics"},
-            f = {":lua vim.lsp.buf.formatting()<cr>", "Format"},
-            i = {":LspInfo<cr>", "Info"},
-            I = {":LspInstallInfo<cr>", "Installer Info"},
-            r = {":lua vim.lsp.buf.rename()<cr>", "Rename"}
-        },
-        s = {
-            name = "Search",
-            b = {":Telescope git_branches <cr>", "Checkout branch"},
-            c = {":Telescope colorscheme <cr>", "Colorscheme"},
-            C = {":Telescope commands <cr>", "Commands"},
-            f = {":Telescope find_files <cr>", "Find File"},
-            h = {":Telescope help_tags <cr>", "Find Help"},
-            j = {":Telescope jumplist <cr>", "Jumplist"},
-            k = {":Telescope keymaps <cr>", "Keymaps"},
-            M = {":Telescope man_pages <cr>", "Man Pages"},
-            r = {":Telescope oldfiles <cr>", "Open Recent File"},
-            R = {":Telescope registers <cr>", "Registers"},
-            t = {":Telescope live_grep <cr>", "Text"},
-            n = {
-                ":Telescope live_grep search_dirs={os.getenv('NOTES')} <cr>",
-                "Notes"
-            },
-            p = {
-                ":lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>",
-                "Colorscheme with Preview"
-            }
-        },
-        T = {name = "Treesitter", i = {":TSConfigInfo<cr>", "Info"}},
-        t = {
-            name = "Diagnostics",
-            t = {"<cmd>TroubleToggle<cr>", "trouble"},
-            w = {"<cmd>TroubleToggle workspace_diagnostics<cr>", "workspace"},
-            d = {"<cmd>TroubleToggle document_diagnostics<cr>", "document"},
-            q = {"<cmd>TroubleToggle quickfix<cr>", "quickfix"},
-            l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
-            r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
-        }
+
+        -- { "", "<leader>qc", desc = ":BufferClose!<CR>", nowait = true, remap = false },
+        -- { "", "<leader>qst", desc = ":Telescope live_grep <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsr", desc = ":Telescope oldfiles <cr>", nowait = true, remap = false },
+        { "", group = "Diagnostics", nowait = true, remap = false },
+        -- { "", "<leader>qtd", desc = "<cmd>TroubleToggle document_diagnostics<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qtl", desc = "<cmd>TroubleToggle loclist<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsp", desc = ":lua require('telescope.builtin.internal').colorscheme({enable_preview = true})<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsk", desc = ":Telescope keymaps <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsn", desc = ":Telescope live_grep search_dirs={os.getenv('NOTES')} <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsh", desc = ":Telescope help_tags <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsj", desc = ":Telescope jumplist <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsf", desc = ":Telescope find_files <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qtq", desc = "<cmd>TroubleToggle quickfix<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qtt", desc = "<cmd>TroubleToggle<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qbd", desc = ":bd<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qbf", desc = ":Telescope buffers <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qbl", desc = ":Telescope buffers<CR>", nowait = true, remap = false },
+        -- { "", "<leader>qtr", desc = "<cmd>TroubleToggle lsp_references<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qbb", desc = ":b#<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qTi", desc = ":TSConfigInfo<cr>", nowait = true, remap = false },
+        { "", group = "Buffers", nowait = true, remap = false },
+        -- { "", "<leader>qtw", desc = "<cmd>TroubleToggle workspace_diagnostics<cr>", nowait = true, remap = false },
+        { "", group = "Treesitter", nowait = true, remap = false },
+        -- { "", "<leader>qbn", desc = ":bn<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsc", desc = ":Telescope colorscheme <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsR", desc = ":Telescope registers <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qla", desc = ":Telescope lsp_code_actions<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qlf", desc = ":lua vim.lsp.buf.formatting()<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qli", desc = ":LspInfo<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qlr", desc = ":lua vim.lsp.buf.rename()<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qlI", desc = ":LspInstallInfo<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qh", desc = ":nohlsearch<CR>", nowait = true, remap = false },
+        { "", group = "LSP", nowait = true, remap = false },
+        -- { "", "<leader>qe", desc = ":Telescope file_browser <CR>", nowait = true, remap = false },
+        -- { "", "<leader>qf", desc = ":Telescope find_files <CR>", nowait = true, remap = false },
+        -- { "", "<leader>qsb", desc = ":Telescope git_branches <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qlw", desc = ":Telescope diagnostics<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qpS", desc = ":PackerStatus<cr>", nowait = true, remap = false },
+        { "", group = "Search", nowait = true, remap = false },
+        -- { "", "<leader>qsC", desc = ":Telescope commands <cr>", nowait = true, remap = false },
+        -- { "", "<leader>qsM", desc = ":Telescope man_pages <cr>", nowait = true, remap = false },
+        { "", group = "Packer", nowait = true, remap = false },
+        -- { "", "<leader>qpu", desc = ":PackerUpdate<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qpr", desc = ":lua require('lvim.utils').reload_lv_config()<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qps", desc = ":PackerSync<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qpc", desc = ":PackerCompile<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qpi", desc = ":PackerInstall<cr>", nowait = true, remap = false },
+        -- { "", "<leader>qbp", desc = ":bp<cr>", nowait = true, remap = false },
+
+
     }
 }
 
@@ -144,7 +128,7 @@ local vopts = which_key.vopts
 local mappings = which_key.mappings
 local vmappings = which_key.vmappings
 
-wk.register(mappings, opts)
-wk.register(vmappings, vopts)
+wk.add(mappings, opts)
+wk.add(vmappings, vopts)
 
 if which_key.on_config_done then which_key.on_config_done(wk) end

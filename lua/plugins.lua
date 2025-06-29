@@ -33,7 +33,8 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-nvim-lua'
     use 'tamago324/nlsp-settings.nvim'
     use 'nvim-lua/lsp-status.nvim'
-    use 'jose-elias-alvarez/null-ls.nvim'
+    use 'nvimtools/none-ls.nvim'
+    use 'nvimtools/none-ls-extras.nvim'
 
     -- Code snipsets
     use 'L3MON4D3/LuaSnip'
@@ -59,7 +60,7 @@ return require('packer').startup(function(use)
     use 'f-person/git-blame.nvim'
 
     -- Themes
-    use 'trevordmiller/nova-vim'
+    -- use 'iammerrick/nova-vim'
     use 'cocopon/iceberg.vim'
     use {
         'nvim-lualine/lualine.nvim',

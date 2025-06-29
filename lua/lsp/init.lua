@@ -11,23 +11,29 @@ win.default_opts = function(options)
     return opts
 end
 
-local signs = {
-    active = true,
-    values = {
-        {name = 'DiagnosticSignError', text = ''},
-        {name = 'DiagnosticSignWarn', text = ''},
-        {name = 'DiagnosticSignHint', text = ''},
-        {name = 'DiagnosticSignInfo', text = ''}
-    }
-}
-
-for _, sign in ipairs(signs.values) do
-    vim.fn.sign_define(sign.name, {
-        texthl = sign.name,
-        text = sign.text,
-        numhl = sign.name
-    })
-end
+vim.diagnostic.config({ 
+    signs = {
+        active = true,
+        text = {
+            [vim.diagnostic.severity.ERROR] = '',
+            [vim.diagnostic.severity.WARN] = '',
+            [vim.diagnostic.severity.HINT] = '',
+            [vim.diagnostic.severity.INFO] = ''
+        },
+        linehl = {
+            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
+        }
+    }, 
+    virtual_text = true, 
+    float = {
+        focusable = true,
+        style = "minimal",
+        border = "rounded",
+        source = "always",
+        header = "",
+        prefix = "",
+    },
+})
 
 local kind_icons = {
     Text = '',
@@ -162,13 +168,12 @@ require('nlspsettings').setup()
 vim.diagnostic.config({
     virtual_text = false,
     underline = true,
-    float = {source = 'always'},
+    -- float = {source = 'always'},
     severity_sort = true,
     -- virtual_text = {
     --   prefix = "»",
     --   spacing = 4,
     -- },
-    signs = true,
     update_in_insert = false
 })
 -- Show line diagnostics automatically in hover window
