@@ -1,4 +1,4 @@
-require'lspconfig'.jsonls.setup {
+vim.lsp.config('jsonls', {
     cmd = {
         DATA_PATH ..
             '/lsp_servers/vscode-langservers-extracted/node_modules/.bin/vscode-json-language-server',
@@ -12,4 +12,4 @@ require'lspconfig'.jsonls.setup {
             -- schemas = require'nlspsettings.jsonls'.get_default_schemas()
         }
     }
-}
+})
