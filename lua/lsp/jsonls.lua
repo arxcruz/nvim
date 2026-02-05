@@ -12,4 +12,4 @@ vim.lsp.config.jsonls = {
             -- schemas = require'nlspsettings.jsonls'.get_default_schemas()
         }
     }
-})
+}
