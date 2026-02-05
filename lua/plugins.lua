@@ -95,4 +95,10 @@ return require('packer').startup(function(use)
     use 'voldikss/vim-floaterm'
     use 'christoomey/vim-tmux-navigator'
     use 'xiyaowong/nvim-transparent'
+
+    -- Gemini
+    use {
+        'kiddos/gemini.nvim',
+        config = function() require('gemini-config') end
+    }
 end)

@@ -1,4 +1,4 @@
-vim.lsp.config('jsonls', {
+vim.lsp.config.jsonls = {
     cmd = {
         DATA_PATH ..
             '/lsp_servers/vscode-langservers-extracted/node_modules/.bin/vscode-json-language-server',
