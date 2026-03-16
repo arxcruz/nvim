@@ -11,7 +11,7 @@ win.default_opts = function(options)
     return opts
 end
 
-vim.diagnostic.config({ 
+vim.diagnostic.config({
     signs = {
         active = true,
         text = {
@@ -23,16 +23,17 @@ vim.diagnostic.config({
         linehl = {
             [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
         }
-    }, 
-    virtual_text = true, 
-    float = {
-        focusable = true,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
     },
+    virtual_text = false,
+    underline = true,
+    float = {
+        focusable = false,
+        close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'CursorMovedI' },
+        border = 'rounded',
+        source = 'always',
+    },
+    severity_sort = true,
+    update_in_insert = false
 })
 
 local kind_icons = {
@@ -163,19 +164,3 @@ require("mason-null-ls").setup({
   ensure_installed = { "black" }
 })
 require('nlspsettings').setup()
-
--- diagnostics
-vim.diagnostic.config({
-    virtual_text = false,
-    underline = true,
-    -- float = {source = 'always'},
-    severity_sort = true,
-    -- virtual_text = {
-    --   prefix = "»",
-    --   spacing = 4,
-    -- },
-    update_in_insert = false
-})
--- Show line diagnostics automatically in hover window
-vim.o.updatetime = 250
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]

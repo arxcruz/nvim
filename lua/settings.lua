@@ -30,3 +30,4 @@ vim.o.swapfile = false
 vim.o.splitbelow = true
 vim.o.showtabline = 2
 vim.o.showmode = false
+vim.o.timeoutlen = 300

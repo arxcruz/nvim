@@ -15,10 +15,12 @@ require('floatterm')
 -- require('fzf')
 require('treesitter')
 require('statusline')
-require('whichkey')
 require('telescopeconf')
 require('_bufferline')
 require('autopairs')
+
+-- Commenter
+require('Comment').setup()
 
 -- null-ls
 require('nullls')
